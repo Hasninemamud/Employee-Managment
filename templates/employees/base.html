@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the page */
+        .sidebar {
+            background-color: #1F2937; /* Dark background for the sidebar */
+            min-height: 100vh; /* Full height sidebar */
+        }
+        .sidebar a {
+            color: #ffffff; /* White text for the links */
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        .sidebar a:hover {
+            background-color: #3B82F6; /* Hover effect for sidebar links */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <nav class="sidebar w-1/4 md:w-1/5 lg:w-1/6 p-4">
+            <h2 class="text-xl text-white font-bold mb-6">Employee Management</h2>
+            <ul>
+                <li><a href="{% url 'employee_list' %}">Home</a></li>
+                <li><a href="{% url 'add_employee' %}">Add Employee</a></li>
+                <li><a href="{% url 'employee_list' %}">Employee</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex-1 ">
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+{% extends "employees/base.html" %}
+
+{% block title %} Add Employee {% endblock title %}
+
+{% block content %}
+{% comment %} max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md {% endcomment %}
+
+<div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6">Add Employee</h1>
+    
+    <!-- Form for Adding New Employee -->
+    <form id="addEmployeeForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <div class="mb-4">
+            <label for="first_name" class="block text-gray-700 font-bold">First Name</label>
+            <input type="text" name="first_name" id="first_name" required 
+                   class="w-full p-2 border border-gray-300 rounded-md" placeholder="Enter first name">
+        </div>
+
+        <div class="mb-4">
+            <label for="last_name" class="block text-gray-700 font-bold">Last Name</label>
+            <input type="text" name="last_name" id="last_name" required 
+                   class="w-full p-2 border border-gray-300 rounded-md" placeholder="Enter last name">
+        </div>
+
+        <!-- Email -->
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-bold">Email</label>
+            <input type="email" name="email" id="email" required 
+                   class="w-full p-2 border border-gray-300 rounded-md" placeholder="Enter email">
+        </div>
+
+        <!-- Mobile -->
+        <div class="mb-4">
+            <label for="mobile" class="block text-gray-700 font-bold">Mobile</label>
+            <input type="text" name="mobile" id="mobile" required 
+                   class="w-full p-2 border border-gray-300 rounded-md" placeholder="Enter mobile number">
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="mb-4">
+            <label for="date_of_birth" class="block text-gray-700 font-bold">Date of Birth</label>
+            <input type="date" name="date_of_birth" id="date_of_birth" required 
+                   class="w-full p-2 border border-gray-300 rounded-md">
+        </div>
+
+        <!-- Profile Photo -->
+        <div class="mb-4">
+            <label for="photo" class="block text-gray-700 font-bold">Profile Photo</label>
+            <input type="file" name="photo" id="photo" accept="image/*" class="w-full p-2 border border-gray-300 rounded-md" onchange="previewPhoto()">
+            
+            <!-- Display Photo Preview -->
+            <div class="mt-4">
+                <img id="photoPreview" class="h-32 w-32 object-cover rounded-full" src="/static/images/download.jfif" alt="Employee Photo">
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full p-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600">Add Employee</button>
+
+        <!-- Cancel Button -->
+        <a href="{% url 'employee_list' %}" class="block mt-4 text-center text-gray-500 hover:underline">Cancel</a>
+    </form>
+</div>
+
+<!-- JavaScript for Live Photo Preview -->
+<script>
+    function previewPhoto() {
+        const fileInput = document.getElementById('photo');
+        const photoPreview = document.getElementById('photoPreview');
+
+        // Get the selected file
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                photoPreview.src = e.target.result; // Update the image src to show preview
+            };
+            reader.readAsDataURL(file); // Convert the file to a data URL
+        }
+    }
+</script>
+
+{% endblock content %}
