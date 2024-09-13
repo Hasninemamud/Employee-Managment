@@ -9,9 +9,9 @@ class EmployeeForm(forms.ModelForm):
 
     def save(self, *args, **kwargs):
         employee = super(EmployeeForm, self).save(*args, **kwargs)
-        # Resize image before saving
+        
         if employee.photo:
             image = Image.open(employee.photo)
-            image = image.resize((300, 300))  # Resize to 300x300 or another size as per requirements
+            image = image.resize((300, 300))  
             image.save(employee.photo.path)
         return employee

@@ -3,7 +3,7 @@
 {% block title %} Add Employee {% endblock title %}
 
 {% block content %}
-{% comment %} max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md {% endcomment %}
+
 
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
     <h1 class="text-2xl font-bold mb-6">Add Employee</h1>
@@ -65,20 +65,20 @@
     </form>
 </div>
 
-<!-- JavaScript for Live Photo Preview -->
+
 <script>
     function previewPhoto() {
         const fileInput = document.getElementById('photo');
         const photoPreview = document.getElementById('photoPreview');
 
-        // Get the selected file
+        
         const file = fileInput.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                photoPreview.src = e.target.result; // Update the image src to show preview
+                photoPreview.src = e.target.result; 
             };
-            reader.readAsDataURL(file); // Convert the file to a data URL
+            reader.readAsDataURL(file); 
         }
     }
 </script>

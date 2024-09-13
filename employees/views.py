@@ -15,7 +15,7 @@ def employee_list(request):
     employees = employees.order_by(sort_by)
 
     # Pagination
-    paginator = Paginator(employees, 10)  # 10 employees per page
+    paginator = Paginator(employees, 10)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -29,7 +29,7 @@ def add_employee(request):
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('employee_list')  # After adding, redirect to the employee list page
+            return redirect('employee_list')  
     else:
         form = EmployeeForm()
     return render(request, 'employees/add_employee.html', {'form': form})
@@ -40,7 +40,7 @@ def edit_employee(request, pk):
         form = EmployeeForm(request.POST, request.FILES, instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('employee_list')  # After editing, redirect to the employee list page
+            return redirect('employee_list')  
     else:
         form = EmployeeForm(instance=employee)
     return render(request, 'employees/edit_employee.html', {'form': form})
