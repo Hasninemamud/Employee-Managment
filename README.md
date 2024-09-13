@@ -58,5 +58,5 @@ This is a Django-based **Employee Management System** that allows users to manag
 6. **Access the application**:
     Visit `http://127.0.0.1:8000/` in your browser.
 
-## Project Structure
+
 
