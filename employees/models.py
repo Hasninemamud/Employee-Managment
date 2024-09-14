@@ -1,15 +1,22 @@
 from django.db import models
-
-# Create your models here.
-
+from PIL import Image
 
 class Employee(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
     mobile = models.CharField(max_length=15)
     date_of_birth = models.DateField()
-    photo = models.ImageField(upload_to='employees/', null=True, blank=True)
+    photo = models.ImageField(upload_to='employee_photos/')
 
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Save the instance first
+
+        # Resize the photo
+        img = Image.open(self.photo.path)
+        
+        # Set a maximum size (e.g., 300x300 pixels)
+        max_size = (300, 300)
+        if img.height > 300 or img.width > 300:
+            img.thumbnail(max_size)
+            img.save(self.photo.path)

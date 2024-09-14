@@ -28,7 +28,7 @@
 <body class="bg-gray-100">
 
 <div class="min-h-screen flex">
-    <!-- Sidebar -->
+  
     <nav class="sidebar w-1/4 md:w-1/5 lg:w-1/6 p-4">
         <h2 class="text-xl text-white font-bold mb-6">Employee Management</h2>
         <ul>
@@ -38,18 +38,18 @@
         </ul>
     </nav>
 
-    <!-- Main Content (Employee List) -->
+  
     <div class="w-3/4 md:w-4/5 lg:w-5/6 p-6">
         <h1 class="text-2xl font-bold mb-6">Employee List</h1>
 
-        <!-- Search Form -->
+        
         <form method="GET" class="form-inline mb-4">
             <input type="text" name="search" class="p-2 border border-gray-300 rounded-md" placeholder="Search by name or email" value="{{ request.GET.search }}">
             <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Search</button>
             <a href="{% url 'add_employee' %}" class="ml-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Employee</a>
         </form>
 
-<!-- Employee Table -->
+
 <table class="min-w-full bg-white rounded-md shadow-md border border-gray-300 border-collapse">
     <thead class="bg-gray-100">
         <tr>
@@ -78,12 +78,12 @@
             <td class="p-3 border border-gray-300">{{ employee.date_of_birth }}</td>
             
             <td class="p-3 border border-gray-300">
-                <!-- Edit and Delete buttons with icons -->
+               
                 <a href="{% url 'edit_employee' employee.pk %}" class="text-blue-500 hover:underline">
-                    <i class="fas fa-edit"></i> <!-- Font Awesome Edit icon -->
+                    <i class="fas fa-edit"></i> 
                 </a>
                 <button class="ml-2 text-red-500 hover:underline" onclick="confirmDelete({{ employee.pk }})">
-                    <i class="fas fa-trash-alt"></i> <!-- Font Awesome Delete icon -->
+                    <i class="fas fa-trash-alt"></i> 
                 </button>
             </td>
             
