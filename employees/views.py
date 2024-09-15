@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from .models import Employee
 from .forms import EmployeeForm
 
+from django.db.models import Q
+
 def employee_list(request):
     search_query = request.GET.get('search', '')
     employees = Employee.objects.filter(first_name__icontains=search_query) | Employee.objects.filter(email__icontains=search_query)
@@ -15,36 +17,37 @@ def employee_list(request):
     employees = employees.order_by(sort_by)
 
     # Pagination
-    paginator = Paginator(employees, 10)  
+    paginator = Paginator(employees, 10)  # 10 employees per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'employees/employee_list.html', {'page_obj': page_obj})
 
 
-
-
+    # Add new employee
 def add_employee(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('employee_list')  
+            return redirect('employee_list')
     else:
         form = EmployeeForm()
     return render(request, 'employees/add_employee.html', {'form': form})
-
+    # Edit employee details
 def edit_employee(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES, instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('employee_list')  
+            return redirect('employee_list')
     else:
         form = EmployeeForm(instance=employee)
     return render(request, 'employees/edit_employee.html', {'form': form})
 
+
+    # Delete employee 
 def delete_employee(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':

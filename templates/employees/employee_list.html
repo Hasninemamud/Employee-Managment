@@ -65,11 +65,9 @@
         {% for employee in page_obj %}
         <tr class="border-b">
             <td class="p-3 border border-gray-300">
-                {% if employee.photo %}
-                    <img src="{{ employee.photo.url }}" alt="Photo" class="h-20 w-20 object-cover">
-                {% else %}
-                    <img src="/static/images/download.jfif" alt="Default Photo" class="h-20 w-20 object-cover rounded-full">
-                {% endif %}
+                <img src="{% if employee.photo %}{{ employee.photo.url }}{% else %}{{ MEDIA_URL }}employee_photos/default.jfif{% endif %}" alt="Employee Photo" class="h-20 w-20 rounded-full">
+
+
             </td>
             
             <td class="p-3 border border-gray-300">{{ employee.first_name }} {{ employee.last_name }}</td>
